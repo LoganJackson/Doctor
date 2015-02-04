@@ -9,28 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    var obdCode: [Int: String] = [ 100 : "Mass or Volume Air Flow Circuit Malfunction",
-                                   101 : "Mass or Volume Air Flow Circuit Range/Performance Problem",
-                                   102 : "Mass or Volume Air Flow Circuit Low Input",
-                                   103 : "Mass or Volume Air Flow Circuit High Input",
-                                   104 : "Mass or Volume Air Flow Circuit Intermittent",
-                                   105 : "Manifold Absolute Pressure/Barometric Pressure Circuit Malfunction",
-                                   106 : "Manifold Absolute Pressure/Barometric Pressure Circuit Range/Performance Problem",
-                                   107 : "Manifold Absolute Pressure/Barometric Pressure Circuit Low Input",
-                                   108 : "Manifold Absolute Pressure/Barometric Pressure Circuit High Input",
-                                   109 : "Manifold Absolute Pressure/Barometric Pressure Circuit Intermittent"]
-       
-    
-    
-    var codeNumber = 100
-
-  
-    
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var problemLabel: UILabel!
     
-    @IBOutlet weak var errorCode: UITextField!
+    var codeNumber = 100
+
+    let p0Dictionary: [Int: String] = [ 100 : "Mass or Volume Air Flow Circuit Malfunction",
+                                        101 : "Mass or Volume Air Flow Circuit Range/Performance Problem",
+                                        102 : "Mass or Volume Air Flow Circuit Low Input",
+                                        103 : "Mass or Volume Air Flow Circuit High Input",
+                                        104 : "Mass or Volume Air Flow Circuit Intermittent",
+                                        105 : "Manifold Absolute Pressure/Barometric Pressure Circuit Malfunction",
+                                        106 : "Manifold Absolute Pressure/Barometric Pressure Circuit Range/Performance Problem",
+                                        107 : "Manifold Absolute Pressure/Barometric Pressure Circuit Low Input",
+                                        108 : "Manifold Absolute Pressure/Barometric Pressure Circuit High Input",
+                                        109 : "Manifold Absolute Pressure/Barometric Pressure Circuit Intermittent"]
     
     @IBAction func scanButton(sender: AnyObject) {
         
@@ -58,20 +51,24 @@ class ViewController: UIViewController {
         
         task.resume()
         
+        println(urlString)*/
         
+        var randomNumber = Int(arc4random_uniform(11))
         
+        println(randomNumber)
+        codeNumber = codeNumber + randomNumber
+        println(codeNumber)
         
-        println(urlString)
-
-        
-        if errorCode != nil {
-            codeNumber = (errorCode.text as NSString).substringFromIndex(1).toInt()!
-        }*/
-        
-        codeLabel.text = "P0\(codeNumber):"
-        problemLabel.text = obdCode[codeNumber]!
-        
-        println(obdCode[codeNumber]!)
+        if p0Dictionary[codeNumber] != nil
+        {
+            codeLabel.text = "P0\(codeNumber):"
+            problemLabel.text = p0Dictionary[codeNumber]!
+        } else
+        {
+            codeLabel.text = ""
+            problemLabel.text = "False Code"
+        }
+        codeNumber = 100
         
     }
     override func viewDidLoad() {
