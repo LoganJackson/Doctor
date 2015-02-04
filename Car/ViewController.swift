@@ -12,7 +12,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var problemLabel: UILabel!
     
+//codeNumber will be what is transmitted from the car to the phone
     var codeNumber = 100
+    
+/*
+For testing p0Dictionary can be hardcoded, 
+But for rollout will we be hosting this info (code numbers and meanings) on a server?
+or will these be stored on the phone?
+
+Also with such a big database of codes and meanings, we should look into the most effecient way to store and access the info
+ie. hastTable vs Arraylist vs something else?
+*/
 
     let p0Dictionary: [Int: String] = [ 100 : "Mass or Volume Air Flow Circuit Malfunction",
                                         101 : "Mass or Volume Air Flow Circuit Range/Performance Problem",
@@ -66,7 +76,7 @@ class ViewController: UIViewController {
         } else
         {
             codeLabel.text = ""
-            problemLabel.text = "False Code"
+            problemLabel.text = "False Code"  //"Code not recognized, please rescan or visit your closest car shop" 
         }
         codeNumber = 100
         
